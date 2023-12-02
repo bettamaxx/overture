@@ -19,7 +19,9 @@
         "lint-eslint": "eslint source",
         "lint-prettier": "prettier --check source",
         "fix": "prettier --write source && eslint --fix source",
-        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+	"preinstall": "( [ ! -e ./lib ] && [ ! -e ./.AlreadyInstalled ] && echo \"\" > ./.AlreadyInstalled && npm install . && npm run build ) || echo \"SKIP: NON GIT SOURCE\"",
+	"postinstall": "( [ ! -f ./.gitignore ] && rm -rf ./src ./scripts ./.babelrc ./rollup.config.js ./tsconfig.json ./node_modules ) || echo \"SKIPDeleteMainPackage\""
     },
     "license": "MIT",
     "repository": {
